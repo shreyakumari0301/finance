@@ -1,18 +1,19 @@
 # Fintech News Aggregator
 
-A Streamlit-based application that fetches fintech news from Google News API, filters relevant content, and classifies articles into Global, National, and Funding categories.
+A Streamlit-based application that fetches fintech news from RSS feeds, filters relevant content, and classifies articles into Global, National, and Funding categories.
 
 ## Features
 
-- 📰 Fetches news from the past 14 days (configurable)
+- 📰 Fetches news from RSS feeds (past 14 days, configurable)
 - 🔍 Filters for fintech-related content using keyword matching
 - 📊 Classifies news into three categories:
   - **Global**: International fintech developments
   - **National**: Domestic fintech news and regulations
   - **Funding**: Investment rounds, acquisitions, and funding news
-- 🎨 Light-themed Streamlit interface
+- 🎨 Modern light-themed Streamlit interface with responsive design
 - 📥 Export functionality to CSV
 - ⚙️ Configurable filters and date ranges
+- 📱 Responsive layout with article cards
 
 ## Setup
 
@@ -23,7 +24,7 @@ A Streamlit-based application that fetches fintech news from Google News API, fi
 
 2. **Run the application:**
    ```bash
-   streamlit run fintech_news_aggregator.py
+   streamlit run app.py
    ```
 
 3. **Access the app:**
@@ -31,10 +32,10 @@ A Streamlit-based application that fetches fintech news from Google News API, fi
 
 ## Configuration
 
-- **API Key**: Already configured with your GNews API key
 - **Date Range**: Adjustable from 1-30 days (default: 14 days)
-- **Article Limit**: Configurable from 10-200 articles (default: 100)
+- **News Sources**: RSS feeds from Fintech News, Finextra, and TechCrunch
 - **Filters**: Toggle visibility for different news categories
+- **Article Limit**: Up to 10 articles per source
 
 ## Usage
 
@@ -43,28 +44,37 @@ A Streamlit-based application that fetches fintech news from Google News API, fi
 3. View articles with their classification and source information
 4. Download results as CSV for further analysis
 
-## API Information
+## News Sources
 
-- **Provider**: GNews.io
-- **Endpoint**: https://gnews.io/api/v4/search
-- **Rate Limits**: Check GNews.io documentation for current limits
+The app fetches from these RSS feeds:
+- **Fintech News**: https://www.fintechnews.org/feed/
+- **Finextra**: https://www.finextra.com/rss/feeds.aspx
+- **TechCrunch Fintech**: https://techcrunch.com/category/fintech/feed/
 
 ## Classification Logic
 
 The app uses keyword-based classification:
 
-- **Funding**: Articles containing funding, investment, VC, series rounds, etc.
+- **Funding**: Articles containing funding, investment, VC, series, IPO, acquisition
 - **Global**: International, worldwide, cross-border developments
-- **National**: Domestic, local, government, regulatory news
-- **Default**: Falls back to National if no clear indicators
+- **National**: Domestic, local, government, regulatory news (default fallback)
+
+## Dependencies
+
+- `streamlit` - Web application framework
+- `requests` - HTTP requests
+- `pandas` - Data manipulation
+- `beautifulsoup4` - HTML parsing
+- `feedparser` - RSS feed parsing
 
 ## Deployment
 
 For production deployment, consider:
-- Environment variables for API keys
-- Caching mechanisms for API responses
-- Scheduled runs (every 14 days as planned)
+- Environment variables for configuration
+- Caching mechanisms for RSS responses
+- Scheduled runs for regular updates
 - Database storage for historical data
+- Error handling for RSS feed failures
 
 ## License
 
